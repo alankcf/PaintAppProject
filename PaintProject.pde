@@ -1,36 +1,21 @@
 //pallette
-
 color red = #FF0303;
-
 color orange = #FF8103;
-
 color green = #03FF2A;
-
 color blue = #03B9FF;
-
 color white = #FCFCFC;
-
 color black = #050505;
 
 
-
 float slider;
-
 float shade;
-
 float thickness;
-
 float size;
 float buttons;
 
-
-
 color selectedColor;
 
-
-
 PImage orca;
-
 boolean orcaOn; //true or false
 
 
