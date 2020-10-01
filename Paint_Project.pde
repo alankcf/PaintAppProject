@@ -9,8 +9,12 @@ color black = #050505;
 float slider;
 float shade;
 float thickness;
+float size;
 
 color selectedColor;
+
+PImage orca;
+boolean orcaOn; //true or false
 
 void setup() {
 
@@ -20,7 +24,9 @@ void setup() {
   strokeWeight(0);
   selectedColor = #A3A4A5;
   slider = 400;
-  
+  size = 20;
+  orca = loadImage("unnamed.png");
+  orcaOn = false;
 }
 
 void draw() {
@@ -31,10 +37,11 @@ void draw() {
   stroke(black);
   rect(0, 0, 75, 600); //toolbar
   fill(red);
-  strokeWeight(3);
+  strokeWeight(2);
   stroke(black);
-  line (37, 350, 37, 500);
-  circle(37, slider, 37);
+  line (37, 320, 37, 470);
+  fill(selectedColor);
+  circle(37, slider, size);
 
   //buttons
   fill(red);
@@ -54,11 +61,17 @@ void draw() {
 
   fill(black);
   tactileCircle(37, 200, 25);
+  fill(255);
 
-  
-  //strokeWeight(2);
-  //fill(0);
-  //rect(12, 600, 50, 20);
+  // indicator of size
+  //fill(selectedColor);
+  //circle(37, 500, size);
+
+  //orca buttons
+  tactileOrca(8, 240, 60, 60);
+  orcaOnOff();
+  rect(5, 235, 65, 65);
+  image(orca, 8, 240, 60, 60);
 }
 
 void tactileCircle (int x, int y, int r) {
@@ -72,10 +85,16 @@ void tactileCircle (int x, int y, int r) {
   circle(x, y, r);
 }
 void mouseDragged() {
-  controlSlider();
-  strokeWeight(thickness);
-  stroke(selectedColor);
-  line(pmouseX, pmouseY, mouseX, mouseY);
+  if (orcaOn == false) {
+    // squigly line
+    controlSlider();
+    strokeWeight(thickness);
+    stroke(selectedColor);
+    line(pmouseX, pmouseY, mouseX, mouseY);
+  } else {
+    // orca drawing
+    image(orca, mouseX, mouseY, 60, 60);
+  }
 }
 
 void mouseReleased() {
@@ -98,11 +117,38 @@ void mouseReleased() {
   if (dist (37, 200, mouseX, mouseY) < 25) {
     selectedColor = black;
   }
+
+  //orca button
+  if (mouseX > 5 && mouseX < 70 && mouseY > 235 && mouseY < 300) {
+    orcaOn = !orcaOn;
+  } else {
+    orcaOn = false;
+  }
 }
 
+void tactileOrca(int x, int y, int w, int h) {
+  if (mouseX > x && mouseX < x+w && mouseY > y && mouseY < y+h) {
+    strokeWeight(0);
+    fill(245);
+  } else {
+    strokeWeight(0);
+    fill(220);
+  }
+}
 void controlSlider() {
-  if (mouseX > 0 && mouseX < 56 && mouseY > 350 && mouseY < 500) {
+  if (mouseX > 0 && mouseX < 56 && mouseY > 320 && mouseY < 470) {
     slider = mouseY;
-    thickness = mouseY - 350;
+    thickness = mouseY - 320;
+    size = (mouseY - 290) /3;
+  } 
+}
+
+void orcaOnOff() {
+  if (orcaOn == true) {
+    stroke(255, 0, 0);
+    strokeWeight(5);
+  } else {
+    stroke(0);
+    strokeWeight(1);
   }
 }
