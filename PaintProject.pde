@@ -21,6 +21,7 @@ float shade;
 float thickness;
 
 float size;
+float buttons;
 
 
 
@@ -46,7 +47,7 @@ void setup() {
 
   strokeWeight(0);
 
-  selectedColor = #A3A4A5;
+  selectedColor = orange;
 
   slider = 400;
 
@@ -69,7 +70,7 @@ void draw() {
 
   strokeWeight(0);
 
-  fill(220);
+  fill(170, 3, 3);
 
   stroke(black);
 
@@ -128,15 +129,6 @@ void draw() {
   fill(255);
 
 
-
-  // indicator of size
-
-  //fill(selectedColor);
-
-  //circle(37, 500, size);
-
-
-
   //orca buttons
 
   tactileOrca(8, 240, 60, 60);
@@ -146,8 +138,21 @@ void draw() {
   rect(5, 235, 65, 65);
 
   image(orca, 8, 240, 60, 60);
-}
 
+
+  // rect buttons
+  fill(0);
+  strokeWeight(0);
+  buttons();
+  rect(12, 540, 50, 20); 
+
+  //text
+  textSize(10);
+  fill(255);
+  textAlign(CENTER, CENTER);
+  text("NEW", 37, 550);
+  //text("SAVE", 37, 580);
+}
 
 
 void tactileCircle (int x, int y, int r) {
@@ -229,15 +234,18 @@ void mouseReleased() {
   //orca button
 
   if (mouseX > 5 && mouseX < 70 && mouseY > 235 && mouseY < 300) {
-
     orcaOn = !orcaOn;
   } else {
-
     orcaOn = false;
   }
+
+  // clear
+  if (mouseX > 12 && mouseX < 62 && mouseY > 540 && mouseY < 560) {
+    fill(255);
+    strokeWeight(0);
+    rect(76, 0, 725, 600);
+  }
 }
-
-
 
 void tactileOrca(int x, int y, int w, int h) {
 
@@ -260,13 +268,18 @@ void controlSlider() {
 
     slider = mouseY;
 
-    thickness = mouseY - 320;
+    thickness = (mouseY - 320) / 2;
 
     size = (mouseY - 290) /3;
   }
 }
 
-
+void buttons() {
+  if (mouseX > 12 && mouseX < 62 && mouseY > 540 && mouseY < 560) {
+    stroke(white);
+    strokeWeight(3);
+  }
+}
 
 void orcaOnOff() {
 
