@@ -19,29 +19,17 @@ PImage orca;
 boolean orcaOn; //true or false
 
 
-
 void setup() {
 
-
-
   background(255);
-
   size(800, 600);
-
   fill(163, 164, 165);
-
   strokeWeight(0);
-
   selectedColor = orange;
-
   slider = 400;
-
   size = 40;
-
   thickness = 80;
-
   orca = loadImage("unnamed.png");
-
   orcaOn = false;
 }
 
@@ -52,76 +40,52 @@ void draw() {
   //background(shade);
 
   //shade = map(slider, 75, 700, 0, 255);
-
   strokeWeight(0);
-
   fill(170, 3, 3);
-
   stroke(black);
-
   rect(0, 0, 75, 600); //toolbar
-
   fill(red);
-
   strokeWeight(2);
-
   stroke(black);
-
   line (37, 320, 37, 470);
-
   fill(selectedColor);
-
   circle(37, slider, size);
 
-
-
   //buttons
-
   fill(red);
-
   tactileCircle(37, 25, 25);
 
 
-
   fill(orange);
-
   tactileCircle(37, 60, 25);
 
 
 
   fill(green);
-
   tactileCircle(37, 95, 25);
 
 
 
   fill(blue);
-
   tactileCircle(37, 130, 25);
 
 
 
   fill(white);
-
   tactileCircle(37, 165, 25);
 
 
 
   fill(black);
-
   tactileCircle(37, 200, 25);
 
   fill(255);
 
-
   //orca buttons
 
   tactileOrca(8, 240, 60, 60);
-
   orcaOnOff();
-
   rect(5, 235, 65, 65);
-
   image(orca, 8, 240, 60, 60);
 
 
