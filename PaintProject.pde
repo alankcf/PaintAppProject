@@ -1,4 +1,9 @@
-//pallette
+// PaintApp Project
+
+// Alan Fung
+// Sept 29, 2020
+
+//colors
 color red = #FF0303;
 color orange = #FF8103;
 color green = #03FF2A;
@@ -6,12 +11,14 @@ color blue = #03B9FF;
 color white = #FCFCFC;
 color black = #050505;
 
+// functions
 float slider;
 float shade;
 float thickness;
 float size;
 float buttons;
 float buttons2;
+float tactileint;
 
 color selectedColor;
 
@@ -44,6 +51,7 @@ void draw() {
   stroke(black);
   line (37, 320, 37, 470);
   fill(selectedColor);
+  tactileint();
   circle(37, slider, size);
 
   //buttons
@@ -116,7 +124,7 @@ void mouseDragged() {
     line(pmouseX, pmouseY, mouseX, mouseY);
   } else {
     // orca drawing
-    image(orca, mouseX, mouseY, 60, 60);
+    image(orca, mouseX, mouseY, size, size);
   }
 }
 
@@ -146,7 +154,9 @@ void mouseReleased() {
   //orca button
   if (mouseX > 5 && mouseX < 70 && mouseY > 235 && mouseY < 300) {
     orcaOn = !orcaOn;
-  } else {
+  }
+  
+  if (mouseX < 5 && mouseX > 70 && mouseY < 235 && mouseY > 300) {
     orcaOn = false;
   }
 
@@ -171,6 +181,14 @@ void tactileOrca(int x, int y, int w, int h) {
     strokeWeight(0);
     fill(220);
   }
+}
+
+void tactileint() {
+ 
+  if (dist(37, slider, mouseX, mouseY) < (size/2) )
+  stroke(white);
+  strokeWeight(3);
+
 }
 
 void controlSlider() {
@@ -199,7 +217,7 @@ void buttons2() {
 void orcaOnOff() {
 
   if (orcaOn == true) {
-    stroke(255, 0, 0);
+    stroke(blue);
     strokeWeight(5);
   } else {
     stroke(0);
