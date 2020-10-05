@@ -116,7 +116,7 @@ void tactileCircle (int x, int y, int r) {
 void mouseDragged() {
 
   if (orcaOn == false) {
-    // squigly line
+    // squigly lines
     controlSlider();
     strokeWeight(thickness);
     if (mouseX > -30 && mouseX < 75 && mouseY > 0 && mouseY < 600) {
@@ -129,14 +129,29 @@ void mouseDragged() {
     line(pmouseX, pmouseY, mouseX, mouseY);
   } else {
     // orca drawing
-    image(orca, mouseX, mouseY, size, size);
-    
+    image(orca, mouseX, mouseY, size, size); 
   }
-  
 }
 
 void mouseReleased() {
-
+  
+if (orcaOn == false) {
+    // squigly lines
+    controlSlider();
+    strokeWeight(thickness);
+    if (mouseX > -30 && mouseX < 75 && mouseY > 0 && mouseY < 600) {
+    //noStroke();
+    //noFill();
+    strokeWeight(0);
+    fill(0, 0, 0, 100);
+  }
+    stroke(selectedColor);
+    line(pmouseX, pmouseY, mouseX, mouseY);
+  } else {
+    // orca drawing
+    image(orca, mouseX, mouseY, size, size); 
+  }
+  
   controlSlider();
 
   if (dist (37, 25, mouseX, mouseY) < 25) {
