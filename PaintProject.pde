@@ -8,7 +8,7 @@ color red = #FF0303;
 color orange = #FF8103;
 color green = #03FF2A;
 color blue = #03B9FF;
-color white = #FCFCFC;
+color white = #FFFFFF;
 color black = #050505;
 
 // functions
@@ -41,7 +41,6 @@ void setup() {
 
 
 void draw() {
-
   strokeWeight(0);
   fill(170, 3, 3);
   stroke(black);
@@ -76,9 +75,9 @@ void draw() {
   fill(255);
 
   //orca buttons
-
   tactileOrca(8, 240, 60, 60);
   orcaOnOff();
+  
   rect(5, 235, 65, 65);
   image(orca, 8, 240, 60, 60);
 
@@ -120,12 +119,20 @@ void mouseDragged() {
     // squigly line
     controlSlider();
     strokeWeight(thickness);
+    if (mouseX > -30 && mouseX < 75 && mouseY > 0 && mouseY < 600) {
+    //noStroke();
+    //noFill();
+    strokeWeight(0);
+    fill(0, 0, 0, 100);
+  }
     stroke(selectedColor);
     line(pmouseX, pmouseY, mouseX, mouseY);
   } else {
     // orca drawing
     image(orca, mouseX, mouseY, size, size);
+    
   }
+  
 }
 
 void mouseReleased() {
@@ -134,28 +141,36 @@ void mouseReleased() {
 
   if (dist (37, 25, mouseX, mouseY) < 25) {
     selectedColor = red;
+    orcaOn = false;
   }
   if (dist (37, 60, mouseX, mouseY) < 25) {
     selectedColor = orange;
+    orcaOn = false;
   }
   if (dist (37, 95, mouseX, mouseY) < 25) {
     selectedColor = green;
+    orcaOn = false;
   }
   if (dist (37, 130, mouseX, mouseY) < 25) {
     selectedColor = blue;
+    orcaOn = false;
   }
   if (dist (37, 165, mouseX, mouseY) < 25) {
     selectedColor = white;
+    orcaOn = false;
   }
   if (dist (37, 200, mouseX, mouseY) < 25) {
     selectedColor = black;
+    orcaOn = false;
   }
   
   //orca button
   if (mouseX > 5 && mouseX < 70 && mouseY > 235 && mouseY < 300) {
     orcaOn = !orcaOn;
   }
-  
+  if (mouseX > 5 && mouseX < 0 && mouseX < 70 && mouseX > 75 && mouseY > 235 && mouseY < 0 && mouseY < 300 && mouseY > 600) {
+    orcaOn = false;
+  }
   if (mouseX < 5 && mouseX > 70 && mouseY < 235 && mouseY > 300) {
     orcaOn = false;
   }
@@ -172,14 +187,15 @@ void mouseReleased() {
   }
 }
 
+
 void tactileOrca(int x, int y, int w, int h) {
 
   if (mouseX > x && mouseX < x+w && mouseY > y && mouseY < y+h) {
     strokeWeight(0);
-    fill(245);
+    fill(220);
   } else {
     strokeWeight(0);
-    fill(220);
+    fill(170, 3, 3);
   }
 }
 
@@ -219,8 +235,10 @@ void orcaOnOff() {
   if (orcaOn == true) {
     stroke(blue);
     strokeWeight(5);
+    
   } else {
     stroke(0);
-    strokeWeight(1);
+    strokeWeight(0);
+   
   }
 }
